@@ -1,7 +1,7 @@
 # Live USDT/IRT Price — TradingView Watchlist
 
 <img width="1838" height="900" alt="usdt-irt-price-in-tradingview-extention" src="https://github.com/user-attachments/assets/b5d7a44c-cfcd-45b8-a1e3-9e497c0b226b" />
-
+<img width="459" height="32" alt="row-zoom-usdt-irt-price-in-tradingview-extention" src="https://github.com/user-attachments/assets/8a3b7951-3fd5-4607-ba53-c358fe57778c" />
 
 
 A Chrome extension that displays the **live USDT price** inside the TradingView Watchlist.
@@ -15,6 +15,7 @@ Whenever the price changes, the strip flashes green or red, just like TradingVie
 ## Installation
 
 1. Open this folder and make sure that `manifest.json` is located next to the other files.
+
 2. Open `chrome://extensions` in Chrome.
 3. Enable **Developer mode** in the top-right corner.
 4. Click **Load unpacked** and select this folder.
