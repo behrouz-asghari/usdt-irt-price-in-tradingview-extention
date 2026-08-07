@@ -1,5 +1,3 @@
-/* نوار قیمت تتر داخل ویجت Watchlist تردینگ‌ویو */
-
 @font-face {
   font-family: 'Vazirmatn RD';
   src: url('../fonts/Vazirmatn-RD-Regular.woff2') format('woff2');
@@ -108,11 +106,9 @@
   white-space: nowrap;
 }
 
-/* فلش قیمت (رنگ لحظه‌ای) */
 .usdt-price.tick-up { color: var(--usdt-green); }
 .usdt-price.tick-down { color: var(--usdt-red); }
 
-/* فلش پس‌زمینه‌ی کل نوار — با لایه‌ی شناور تا گرادیان پس‌زمینه دست‌نخورده بماند */
 .usdt-live-strip::after {
   content: '';
   position: absolute;
