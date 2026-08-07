@@ -1,10 +1,12 @@
 # Live USDT/IRT Price — TradingView Watchlist
 
 <img width="1838" height="900" alt="usdt-irt-price-in-tradingview-extention" src="https://github.com/user-attachments/assets/b5d7a44c-cfcd-45b8-a1e3-9e497c0b226b" />
-<img width="459" height="32" alt="row-zoom-usdt-irt-price-in-tradingview-extention" src="https://github.com/user-attachments/assets/8a3b7951-3fd5-4607-ba53-c358fe57778c" />
 
 
 A Chrome extension that displays the **live USDT price** inside the TradingView Watchlist.
+
+<img width="459" height="32" alt="row-zoom-usdt-irt-price-in-tradingview-extention" src="https://github.com/user-attachments/assets/8a3b7951-3fd5-4607-ba53-c358fe57778c" />
+
 
 The price is received from the **ArzDigital live socket** using the Centrifugo protocol on channel `price:812`.
 
