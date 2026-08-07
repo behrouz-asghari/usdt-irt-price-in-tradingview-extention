@@ -43,26 +43,29 @@
     return v === null || v === undefined || isNaN(v) ? "—" : fa(v);
   }
 
-  function buildStrip() {
-    const el = document.createElement("div");
+function buildStrip() {
+  const el = document.createElement("div");
 
-    el.className = "usdt-live-strip";
-    el.dir = "rtl";
-    el.innerHTML =
-      '<span class="usdt-logo" aria-hidden="true">' +
-      "</span>" +
-      '<span class="usdt-name">' +
-      '  <span class="usdt-name-main">تتر <span class="usdt-ticker">USDT</span></span>' +
-      "</span>" +
-      '<span class="usdt-price-wrap">' +
-      '  <span class="usdt-price" data-part="price">—</span>' +
-      '  <span class="usdt-currency">تومان</span>' +
-      "</span>" +
-      '<span class="usdt-chg" data-part="chg">—</span>' +
-      '<span class="usdt-status"><span class="usdt-dot"></span><span data-part="status">در حال اتصال…</span></span>' +
-      '<span class="usdt-time" data-part="time"></span>';
-    return el;
-  }
+  el.className = "usdt-live-strip";
+  el.dir = "rtl";
+  el.innerHTML =
+    '<span class="usdt-logo" aria-hidden="true">' +
+    "</span>" +
+    '<span class="usdt-name">' +
+    '  <span class="usdt-name-main">تتر <span class="usdt-ticker">USDT</span></span>' +
+    "</span>" +
+    '<span class="usdt-price-wrap">' +
+    '  <span class="usdt-price" data-part="price">—</span>' +
+    '  <span class="usdt-currency">تومان</span>' +
+    "</span>" +
+    '<span class="usdt-chg" data-part="chg">—</span>' +
+    '<span class="usdt-status"><span class="usdt-dot"></span><span data-part="status">در حال اتصال…</span></span>' +
+    '<span class="usdt-time" data-part="time"></span>' +
+    '<div class="usdt-tooltip" data-part="tooltip"></div>';
+
+  return el;
+}
+
 
   function q(part) {
     return strip ? strip.querySelector('[data-part="' + part + '"]') : null;
@@ -119,12 +122,11 @@
       }
     }
 
-    // فلش رنگی هنگام تغییر قیمت
     if (prev !== null && d.toman !== null && d.toman !== prev && strip) {
       const up = d.toman > prev;
       if (priceEl) {
         priceEl.classList.remove("tick-up", "tick-down");
-        void priceEl.offsetWidth; // ری‌استارت انیمیشن
+        void priceEl.offsetWidth;
         priceEl.classList.add(up ? "tick-up" : "tick-down");
       }
       strip.classList.remove("flash-up", "flash-down");
@@ -132,17 +134,22 @@
       strip.classList.add(up ? "flash-up" : "flash-down");
     }
 
-    strip.title = [
-      "قیمت تتر (USDT)",
-      "تومان: " + formatToman(d.toman),
-      "دلار: " + faNum(d.usd),
-      "تغییر ۲۴ساعته: " + formatPct(d.chg24h),
-      "تغییر ۷روزه: " + formatPct(d.chg7d),
-      "ارزش بازار: " + formatBig(d.marketCap),
-      "حجم ۲۴ساعته: " + formatBig(d.volume),
-      "آخرین به‌روزرسانی: " +
-        (d.ts ? new Date(d.ts).toLocaleString("fa-IR") : "—"),
-    ].join("\n");
+const tooltipEl = q("tooltip");
+
+if (tooltipEl) {
+  tooltipEl.innerHTML =
+    '<div class="usdt-tooltip-title">جزئیات بیشتر<span>USDT</span></div>' +
+    '<div class="usdt-tooltip-row"><span>تومان</span><strong>' + formatToman(d.toman) + '</strong></div>' +
+    '<div class="usdt-tooltip-row"><span>دلار</span><strong>' + faNum(d.usd) + '</strong></div>' +
+    '<div class="usdt-tooltip-row"><span>تغییر ۲۴ساعته</span><strong>' + formatPct(d.chg24h) + '</strong></div>' +
+    '<div class="usdt-tooltip-row"><span>تغییر ۷روزه</span><strong>' + formatPct(d.chg7d) + '</strong></div>' +
+    '<div class="usdt-tooltip-row"><span>ارزش بازار</span><strong>' + formatBig(d.marketCap) + '</strong></div>' +
+    '<div class="usdt-tooltip-row"><span>حجم ۲۴ساعته</span><strong>' + formatBig(d.volume) + '</strong></div>' +
+    '<div class="usdt-tooltip-footer">آخرین به‌روزرسانی: ' +
+      (d.ts ? new Date(d.ts).toLocaleString("fa-IR") : "—") +
+    '</div>';
+}
+
   }
 
   function connectSocket() {
@@ -208,7 +215,6 @@
       if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(obj));
     };
 
-    // پاسخ connect → ارسال subscribe
     if (frame.id === 1 && frame.connect) {
       if (frame.connect.error) {
         scheduleReconnect(
