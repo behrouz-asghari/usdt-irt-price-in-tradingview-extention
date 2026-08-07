@@ -1,4 +1,3 @@
-
 (() => {
   "use strict";
 
@@ -27,11 +26,12 @@
     return fa(v, { maximumFractionDigits: decimals });
   }
 
-  function formatPct(ratio) {
-    if (ratio === null || ratio === undefined || isNaN(ratio)) return "—";
-    const pct = ratio * 100;
-    const text = fa(Math.abs(pct), { maximumFractionDigits: 2 });
-    return (pct >= 0 ? "+" : "−") + text + "٪";
+  function formatPct(value) {
+    if (value === null || value === undefined || isNaN(value)) return "—";
+
+    const text = fa(Math.abs(value), { maximumFractionDigits: 2 });
+
+    return   text + "٪"  + (value >= 0 ? "+" : "−");
   }
 
   function formatBig(v) {
@@ -50,7 +50,7 @@
     el.dir = "rtl";
     el.innerHTML =
       '<span class="usdt-logo" aria-hidden="true">' +
-      '</span>' +
+      "</span>" +
       '<span class="usdt-name">' +
       '  <span class="usdt-name-main">تتر <span class="usdt-ticker">USDT</span></span>' +
       "</span>" +
@@ -104,10 +104,9 @@
     if (priceEl) priceEl.textContent = formatToman(d.toman);
 
     if (chgEl && d.chg24h !== null && d.chg24h !== undefined) {
-      const pct = d.chg24h * 100;
       chgEl.textContent = formatPct(d.chg24h);
-      chgEl.classList.toggle("down", pct < 0);
-      chgEl.classList.toggle("up", pct >= 0);
+      chgEl.classList.toggle("down", d.chg24h < 0);
+      chgEl.classList.toggle("up", d.chg24h >= 0);
     }
 
     if (timeEl && d.ts) {
@@ -318,8 +317,7 @@
       port = null;
     }
     if (!port) return;
-    port.onMessage = () => {
-    };
+    port.onMessage = () => {};
     port.onDisconnect = () => {
       port = null;
       setTimeout(connectPort, 3000);
