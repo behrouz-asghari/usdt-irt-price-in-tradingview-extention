@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+  <title>قیمت تتر</title>
+</head>
+<body>
+  <header class="head">
+  <span className="logo"><img src="/icons/icon32.png" width={22} height={22} alt="USDT" /></span>
+    <div class="titles">
+      <h1>قیمت تتر</h1>
+      <span class="sub">USDT · منبع ArzDigital</span>
+    </div>
+    <span class="badge" id="state-badge">—</span>
+  </header>
+
+  <section class="price-row">
+    <div class="price" id="price">—</div>
+    <div class="cur">تومان</div>
+    <div class="chg" id="chg">—</div>
+  </section>
+
+  <section class="meta" id="meta">
+    <div class="meta-row">
+      <span>قیمت دلار</span><b id="usd">—</b>
+    </div>
+    <div class="meta-row">
+      <span>تغییر ۲۴ ساعته</span><b id="chg24">—</b>
+    </div>
+    <div class="meta-row">
+      <span>آخرین به‌روزرسانی</span><b id="time">—</b>
+    </div>
+  </section>
+
+  <p class="hint hidden" id="hint">برای دریافت قیمت، یک تب TradingView باز کنید تا سوکت زنده وصل شود.</p>
+
+  <footer class="foot">
+    <label class="switch">
+      <input type="checkbox" id="toggle" checked>
+      <span class="track"><span class="thumb"></span></span>
+      <span class="label">نمایش در واچ‌لیست</span>
+    </label>
+    <button id="open-tv" title="باز کردن TradingView">باز کردن TradingView</button>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
