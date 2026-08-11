@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Vazirmatn RD";
-  src: url("fonts/Vazirmatn-RD-Regular.woff2") format("woff2");
+  src: url("../fonts/Vazirmatn-RD-Regular.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
@@ -32,7 +32,7 @@ body {
   height: 22px;
   display: inline-block;
   flex: none;
-  background-image: url("icons/icon32.png");
+  background-image: url("../icons/icon32.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -25,6 +25,7 @@ Whenever the price changes, the strip flashes green or red, just like TradingVie
 
 > **Tip:** To test the socket without Chrome, run `node scripts/test-ws.js`.
 > This requires Node.js 21 or later. To test the parser, run `node scripts/test-parser.js`.
+> To verify the popup actually receives the socket data (content → background → popup flow), run `node scripts/test-popup-flow.js`.
 
 ## File Structure
 

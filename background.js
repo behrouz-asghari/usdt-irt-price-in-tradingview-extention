@@ -25,6 +25,8 @@ chrome.runtime.onConnect.addListener((port) => {
       state = msg.state;
       if (msg.error) lastError = msg.error;
       broadcast({ type: 'status', state, data: lastData, error: lastError });
+    } else if (msg.type === 'get-status') {
+      port.postMessage({ type: 'status', state, data: lastData, error: lastError });
     }
   });
 

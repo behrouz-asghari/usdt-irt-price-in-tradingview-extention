@@ -31,7 +31,7 @@
 
     const text = fa(Math.abs(value), { maximumFractionDigits: 2 });
 
-    return   text + "٪"  + (value >= 0 ? "+" : "−");
+    return (value >= 0 ? "+" : "−") + text + "٪";
   }
 
   function formatBig(v) {
@@ -323,11 +323,11 @@ if (tooltipEl) {
       port = null;
     }
     if (!port) return;
-    port.onMessage = () => {};
-    port.onDisconnect = () => {
+    port.onMessage.addListener(() => {});
+    port.onDisconnect.addListener(() => {
       port = null;
       setTimeout(connectPort, 3000);
-    };
+    });
   }
 
   chrome.storage.sync.get({ usdtEnabled: true }, (r) => {

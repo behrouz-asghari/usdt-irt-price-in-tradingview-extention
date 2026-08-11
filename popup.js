@@ -19,23 +19,25 @@ function formatToman(v) {
   return fa(v, { maximumFractionDigits: decimals });
 }
 
-function formatPct(ratio) {
-  if (ratio === null || ratio === undefined || isNaN(ratio)) return '—';
-  const pct = ratio * 100;
-  const text = fa(Math.abs(pct), { maximumFractionDigits: 2 });
-  return (pct >= 0 ? '+' : '−') + text + '٪';
-}
+
+  function formatPct(value) {
+    if (value === null || value === undefined || isNaN(value)) return "—";
+
+    const text = fa(Math.abs(value), { maximumFractionDigits: 2 });
+
+    return (value >= 0 ? "+" : "−") + text + "٪";
+  }
 
 function renderPrice(d) {
   priceEl.textContent = formatToman(d && d.toman);
   usdEl.textContent = faNum(d && d.usd);
   chg24El.textContent = formatPct(d && d.chg24h);
-
+console.log("--------",d)
   if (d && d.chg24h !== null && d.chg24h !== undefined) {
-    const pct = d.chg24h * 100;
-    chgEl.textContent = formatPct(d.chg24h);
-    chgEl.classList.toggle('up', pct >= 0);
-    chgEl.classList.toggle('down', pct < 0);
+
+        chgEl.textContent = formatPct(d.chg24h);
+        chgEl.classList.toggle("up", d.chg24h >= 0);
+      chgEl.classList.toggle("down", d.chg24h < 0);
   } else {
     chgEl.textContent = '—';
     chgEl.classList.remove('up', 'down');
@@ -59,14 +61,14 @@ function renderStatus(state) {
 }
 
 const port = chrome.runtime.connect({ name: 'usdt' });
-port.onMessage = (msg) => {
+port.onMessage.addListener((msg) => {
   if (!msg) return;
   if (msg.type === 'price') renderPrice(msg.data);
   else if (msg.type === 'status') {
     renderStatus(msg.state);
     if (msg.data) renderPrice(msg.data);
   }
-};
+});
 port.postMessage({ type: 'get-status' });
 
 chrome.storage.sync.get({ usdtEnabled: true }, (r) => {
