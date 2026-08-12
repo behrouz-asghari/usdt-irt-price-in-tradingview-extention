@@ -34,13 +34,11 @@
 .usdt-logo {
   width: 22px;
   height: 22px;
-  display: inline-block;
-  border-radius: 50%;
-  background-image: url("https://s3-symbol-logo.tradingview.com/crypto/XTVCUSDT.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  display: block;
+  flex: 0 0 22px;
+  object-fit: cover;
 }
+
 
 .usdt-name { display: flex; flex-direction: column; line-height: 1.3; }
 .usdt-name-main { font-weight: 600; color: #eaecef; white-space: nowrap; }

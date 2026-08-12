@@ -6,6 +6,8 @@
   const PING_MS = 25000;
   const MAX_RETRY_MS = 30000;
   const WIDGET_SELECTOR = '[data-test-id-widget-type="watchlist"]';
+  const ICON_URL = chrome.runtime.getURL("icons/icon32.png");
+
 
   const Parser = window.CentrifugoParser;
 
@@ -49,8 +51,7 @@ function buildStrip() {
   el.className = "usdt-live-strip";
   el.dir = "rtl";
   el.innerHTML =
-    '<span class="usdt-logo" aria-hidden="true">' +
-    "</span>" +
+    '<img class="usdt-logo" src="' + ICON_URL + '" alt="" aria-hidden="true" />' +
     '<span class="usdt-name">' +
     '  <span class="usdt-name-main">تتر <span class="usdt-ticker">USDT</span></span>' +
     "</span>" +
@@ -65,6 +66,7 @@ function buildStrip() {
 
   return el;
 }
+
 
 
   function q(part) {
